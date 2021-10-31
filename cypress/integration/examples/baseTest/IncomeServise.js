@@ -72,7 +72,7 @@ describe ('Прихід Послуги SRV', function(){
                 cy.log(text)
                 const numArr = text.split('-') 
                 cy.get('.styles-m__paper---3d-H1').find('.ant-input').type(numArr[numArr.length-1])
-                cy.get('.ant-table-row > :nth-child(1) > a').invoke('text').then( textFind =>{
+                cy.get('.ant-table-row > :nth-child(1) > a').first().invoke('text').then( textFind =>{
                     expect(text).to.eq(textFind)
                 })
             })
