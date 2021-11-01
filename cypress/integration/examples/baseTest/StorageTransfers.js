@@ -3,10 +3,10 @@
 const baseUrl = 'https://'+Cypress.env('url')+'my.carbook.pro';
 const textServise = 'Доставка Запчастин'
 var date = new Date();
-const idProduct ='TEST'+date.getDate()+date.getMonth()+date.getMinutes();
+const idProduct ='TEST'+date.getDate()+date.getMonth()+date.getMinutes()+date.getSeconds();
 //const idProduct ='TEST'+'11043'
 
-describe ('Складські документи '+Cypress.env('url'), function(){
+describe ('Складські документи ', function(){
         beforeEach('User LogIn ', () => {
             cy.visit(baseUrl)
             cy.get('#login.ant-input').type(Cypress.env('Login'));  
@@ -43,14 +43,13 @@ describe ('Складські документи '+Cypress.env('url'), function(
                 expect(text).to.eq(idProduct)
            })
         })
-        /////**************************************************************************************************************************** */
+        /**************************************************************************************************************************** */
 
   it('Замовлення Постачальнику (ORD) / Створення нового документу ', ()=>{
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
         cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(1) > .styles-m__folderLink---2Myrv').click({force: true})
-
         cy.get(':nth-child(1) > :nth-child(2) > .ant-select > .ant-select-selection').should('have.text','Замовлення постачальнику')
         cy.get('.ant-select > .ant-select-selection').eq(3).type('Exist')
         cy.wait(2000);
@@ -58,7 +57,6 @@ describe ('Складські документи '+Cypress.env('url'), function(
         cy.wait(2000);
         cy.get('.ant-input').eq(3).clear().type('Коментарій Замовлення постачальнику').should('have.text','Коментарій Замовлення постачальнику')
         cy.get(':nth-child(3) > .ant-input').type('ORD'+idProduct)
-
         cy.get(':nth-child(3) > :nth-child(1) > .ant-select > .ant-select-selection').click()
         cy.wait(2000);
         cy.get('.ant-select-dropdown-menu-item-active').first().click({force: true})
@@ -70,25 +68,29 @@ describe ('Складські документи '+Cypress.env('url'), function(
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
     })
 
-    it('Вибір створеного Товару з модалки Каталог', () => {
+    it('Додавання Товару для Замовлення постачальнику', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
-        ////new
         cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(1) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
-      ///new
         cy.wait(2000)
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
         cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})
         cy.wait(2000);
         cy.get('.ant-input').eq(0).should('have.text','')
-        /// new
         cy.get('.ant-modal-body').find('.ant-input').first().type(idProduct) 
-        ///
         cy.get('.ant-modal-body').find('.ant-input-number').first().type('111.11') 
         cy.get('.ant-modal-body').find('.ant-input-number-input').eq(1).clear().type('10.88')
         cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true})
         cy.wait(2000);
+    })
+
+    it('Перевід в статус враховано Замовлення постачальнику', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(1) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
         cy.get('div.ant-dropdown-trigger > span').click()
         cy.wait(2000);
         cy.get('.ant-dropdown-menu-item').contains('Врах.').click()
@@ -97,7 +99,7 @@ describe ('Складські документи '+Cypress.env('url'), function(
         cy.get('.styles-m__header---2z2EP').find('.anticon-close').click()
     })
 
-    it('Відображення трансфера в списку Замовлення постачальнику', () => {
+    it('Відображення документа в списку Замовлення постачальнику', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
@@ -113,7 +115,7 @@ describe ('Складські документи '+Cypress.env('url'), function(
         })
    })
 
-     /////*************КОРИГУВАННЯ ЗАМОВЛЕННЯ*************************************************************************************************** */
+     ////*************КОРИГУВАННЯ ЗАМОВЛЕННЯ*************************************************************************************************** */
      it('Коригування Замовлення (BOR) / Створення нового документу ', ()=>{
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
@@ -137,33 +139,30 @@ describe ('Складські документи '+Cypress.env('url'), function(
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
     })     
         
-    it('Вибір корегуючого Товару з модалки Каталог', () => {
+    it('Вибір корегуючого Товару з модалки Каталог. Перевід у статус Враховано', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
-        ////new
         cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(3) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
-      ///new
         cy.wait(2000)
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
         cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})
         cy.wait(2000);
         cy.get('.ant-input').eq(0).should('have.text','')
-        /// new
         cy.get('.ant-modal-body').find('.ant-input').first().type(idProduct) 
-        ///
         cy.get('.ant-modal-body').find('.ant-input-number').first().type('111.11') 
         cy.get('.ant-modal-body').find('.ant-input-number-handler-up').eq(1).dblclick()
         cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true})
-        cy.wait(2000);
         cy.get('div.ant-dropdown-trigger > span').click()
         cy.wait(2000);
         cy.get('.ant-dropdown-menu-item').contains('Врах.').click()
         cy.wait(2000);
         cy.get('.styles-m__header---2z2EP').contains('Врах.').should('exist')
         cy.get('.styles-m__header---2z2EP').find('.anticon-close').click()
+        cy.wait(2000);
     })
-    it('Відображення трансфера в списку коригування замовлення BOR', () => {
+
+    it('Відображення документа в списку Коригуючих замовлень BOR', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
@@ -178,8 +177,8 @@ describe ('Складські документи '+Cypress.env('url'), function(
             })
         })
     })
-     /////***********ПРИХІД за ЗАМОВЛЕННЯМ***************************************************************************************************** */
 
+     ///***********ПРИХІД за ЗАМОВЛЕННЯМ***************************************************************************************************** */
 
     it('Прихід за Замовленням (COM) / Створення нового документу ', ()=>{
         cy.get('.styles-m__logo---2zDPJ').click()
@@ -208,21 +207,26 @@ describe ('Складські документи '+Cypress.env('url'), function(
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
-        //new
         cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(2) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
-      /new
         cy.wait(2000)
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
         cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})
         cy.wait(2000);
         cy.get('.ant-input').eq(0).should('have.text','')
-        / new
         cy.get('.ant-modal-body').find('.ant-input').first().type(idProduct) 
-        /
         cy.get('.ant-modal-body').find('.ant-input-number').first().type('111.11') 
         cy.get('.ant-modal-body').find('.ant-input-number-handler-up').eq(1).dblclick()
         cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true})
         cy.wait(2000);
+    })
+
+    it('Перевід у статус Враховано Приходу за Замовленням', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(2) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.wait(2000)
+        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
         cy.get('div.ant-dropdown-trigger > span').click()
         cy.wait(2000);
         cy.get('.ant-dropdown-menu-item').contains('Врах.').click()
@@ -231,7 +235,7 @@ describe ('Складські документи '+Cypress.env('url'), function(
         cy.get('.styles-m__header---2z2EP').find('.anticon-close').click()
     })
 
-    it('Відображення трансфера в списку Прихід за замовленням', () => {
+    it('Відображення документа в списку Прихіди за замовленнями', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
@@ -246,9 +250,9 @@ describe ('Складські документи '+Cypress.env('url'), function(
             })
         })
     })
-    /////***********ПРИХІД за ЗАМОВЛЕННЯМ***************************************************************************************************** */
-    /////***********ПРИХІД ТОВАРУ***************************************************************************************************** */
-   
+    ///***********ПРИХІД за ЗАМОВЛЕННЯМ***************************************************************************************************** */
+  
+    ///***********ПРИХІД ТОВАРУ***************************************************************************************************** */
     it('Прихід Товару від Постачальника (INC) / Створення нового документу / ', ()=>{
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
@@ -272,7 +276,7 @@ describe ('Складські документи '+Cypress.env('url'), function(
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
     })
 
-    it('Вибір Товару з модалки Каталог', () => {
+    it('Додавання створеного Товару до списку, редагування ціни', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
@@ -286,14 +290,37 @@ describe ('Складські документи '+Cypress.env('url'), function(
         cy.get('.ant-modal-body').find('.ant-input-number-input').eq(1).clear().type('10.9') 
         cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true})
         cy.wait(2000);
+        cy.get('.ant-modal-body').find('.ant-input').last().click()
+        cy.get('.ant-modal-header').last().should('have.text','Вибір комірки')
+        cy.get('[data-row-key] > :nth-child(8) > .ant-btn').first().click({force: true})
+        cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true})
+    })
+
+    it('Перевід у статус Враховано Приходу Товару від Постачальника', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(6) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.wait(2000)
+        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
         cy.get('div.ant-dropdown-trigger > span').click()
         cy.wait(2000);
         cy.get('.ant-dropdown-menu-item').contains('Врах.').click()
         cy.wait(2000);
         cy.get('.styles-m__header---2z2EP').contains('Врах.').should('exist')
+    })
+
+    it('Оплата Приходу Товару від Постачальника', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(6) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
         cy.get('.styles-m__header---2z2EP').find('.anticon-dollar').should('exist').first().click({force: true})
         cy.get('.ant-modal-header').should('have.text','Касовий ордерЗвичайнийСервісне внесенняСервісна видача')
-        cy.get('.styles-m__buttonGroup---14_lS').find('.ant-btn').click()
+        cy.wait(2000)
+        cy.get('.ant-modal-footer').find('.ant-btn').click({force: true})
+        cy.wait(2000)
         cy.get('.styles-m__sumNumeral---KAUvr').find('span').should('have.text','0 грн.')
         cy.get('.styles-m__header---2z2EP').find('.anticon-close').click()
     })
@@ -314,7 +341,7 @@ describe ('Складські документи '+Cypress.env('url'), function(
         })
     })
 
-    it('Завантаження документа', () => {
+    it('Завантаження документа Приходу Товару від Постачальника', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
@@ -338,6 +365,9 @@ describe ('Складські документи '+Cypress.env('url'), function(
         cy.get('.ant-form').should('exist')
     })
 
+     ///***********ПРИХІД ТОВАРУ***************************************************************************************************** */
+
+      ///***********ПРИХІД Послуги***************************************************************************************************** */
     it('Прихід Послуги (SRV) / Створення трансфера Послуги', ()=>{
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
@@ -381,13 +411,32 @@ describe ('Складські документи '+Cypress.env('url'), function(
         cy.get(':nth-child(5) > .ant-input-number > .ant-input-number-input-wrap > .ant-input-number-input').clear().type(2.2).should('have.value','2,2')
         cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true})
         cy.wait(2000);
+    })
+
+    it('Перевід у статус Враховано Прихід Послуги ', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get('.styles-m__paper---3d-H1').children().eq(1).find(':nth-child(7) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.wait(2000)
+        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
         cy.get('div.ant-dropdown-trigger > span').click()
         cy.wait(2000);
         cy.get('.ant-dropdown-menu-item').contains('Врах.').click()
         cy.wait(2000);
         cy.get('.styles-m__header---2z2EP').contains('Врах.').should('exist')
+        cy.wait(2000);
+    })
+
+    it('Оплата Прихід Послуги ', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get('.styles-m__paper---3d-H1').children().eq(1).find(':nth-child(7) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
         cy.get('.styles-m__header---2z2EP').find('.anticon-dollar').should('exist').first().click({force: true})
         cy.get('.ant-modal-header').should('have.text','Касовий ордерЗвичайнийСервісне внесенняСервісна видача')
+        cy.wait(2000);
         cy.get('.styles-m__buttonGroup---14_lS').find('.ant-btn').click()
         cy.get('.styles-m__sumNumeral---KAUvr').find('span').should('have.text','0 грн.')
         cy.get('.styles-m__header---2z2EP').find('.anticon-close').click()
@@ -411,7 +460,7 @@ describe ('Складські документи '+Cypress.env('url'), function(
         })
     })
 
-    it('Завантаження документа', () => {
+    it('Завантаження документа Прихід Послуг', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
@@ -436,8 +485,11 @@ describe ('Складські документи '+Cypress.env('url'), function(
         })
         cy.get('.ant-form').should('exist')
     })
+ ///***********ПРИХІД Послуги***************************************************************************************************** */
 
-    it('Повернення Постачальнику (STR) / Створення трансфера', ()=>{
+  ///***********Повернення Постачальнику***************************************************************************************************** */
+    
+  it('Повернення Постачальнику (STR) / Створення трансфера', ()=>{
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
@@ -472,18 +524,39 @@ describe ('Складські документи '+Cypress.env('url'), function(
         cy.wait(2000);
         cy.get('.ant-input').eq(0).should('have.text','')
         cy.get('.ant-modal-body').find('.ant-input').first().type(idProduct) 
-        cy.get('.ant-modal-body').find('.ant-input-number-input').eq(1).clear().type('10.9') 
+        cy.get('.ant-modal-body').find('.ant-input-number-input').eq(1).clear().type('1.7') 
         cy.wait(2000);
         cy.get('.ant-modal-body').find('.ant-input').last().click()
         cy.get('.ant-modal-header').last().should('have.text','Вибір комірки')
         cy.get('[data-row-key] > :nth-child(8) > .ant-btn').first().click({force: true})
         cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true})
-        cy.wait(2000);
+    })
+
+    it('Перевід у статус Враховано Повернення Постачальнику', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(8) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.get('.styles-m__header---2z2EP').find(':nth-child(1) > .ant-btn').should('have.text','Повернення постачальнику')
+        cy.wait(2000)
+        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
         cy.get('div.ant-dropdown-trigger > span').click()
         cy.wait(2000);
         cy.get('.ant-dropdown-menu-item').contains('Врах.').click()
         cy.wait(2000);
         cy.get('.styles-m__header---2z2EP').contains('Врах.').should('exist')
+        cy.wait(2000);
+    })
+
+    it('Оплата Повернення Постачальнику', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(8) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.get('.styles-m__header---2z2EP').find(':nth-child(1) > .ant-btn').should('have.text','Повернення постачальнику')
+        cy.wait(2000)
+        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
+        cy.get('div.ant-dropdown-trigger > span').click()
         cy.get('.styles-m__header---2z2EP').find('.anticon-dollar').should('exist').first().click({force: true})
         cy.get('.ant-modal-header').should('have.text','Касовий ордерЗвичайнийСервісне внесенняСервісна видача')
         cy.wait(2000);
@@ -492,7 +565,6 @@ describe ('Складські документи '+Cypress.env('url'), function(
         cy.get('.styles-m__sumNumeral---KAUvr').find('span').last().should('have.text','0 грн.')
         cy.get('.styles-m__header---2z2EP').find('.anticon-close').click()
         cy.get('.styles-m__header---2z2EP').contains('Врах.').should('exist')
-
     })
 
     it('Відображення трансфера в списку Витрат на Складі ', () => {
