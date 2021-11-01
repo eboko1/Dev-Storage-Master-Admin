@@ -1,8 +1,6 @@
 /// <reference types="cypress" />
 
 const baseUrl = 'https://'+Cypress.env('url')+'my.carbook.pro';
-
-
 describe ('Повернення Постачальнику SRT', function(){
         beforeEach('User LogIn ', () => {
             cy.visit(baseUrl)
@@ -103,6 +101,4 @@ describe ('Повернення Постачальнику SRT', function(){
             })
             cy.get('.ant-form').should('exist')
         })
-
-
     })

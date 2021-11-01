@@ -2,7 +2,6 @@
 
 const baseUrl = 'https://'+Cypress.env('url')+'my.carbook.pro';
 
-
 describe ('Прихід Товару від Постачальника INC', function(){
         beforeEach('User LogIn ', () => {
             cy.visit(baseUrl)
