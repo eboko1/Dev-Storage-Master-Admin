@@ -3,8 +3,8 @@
 const baseUrl = 'https://'+Cypress.env('url')+'my.carbook.pro';
 const textServise = 'Доставка Запчастин'
 var date = new Date();
-const idProduct ='TEST'+date.getDate()+date.getMonth()+date.getMinutes()+date.getSeconds();
-//const idProduct ='TEST'+'11043'
+//const idProduct ='TEST'+date.getDate()+date.getMonth()+date.getMinutes()+date.getSeconds();
+const idProduct ='TEST'+'1103050'
 
 describe ('Складські документи ', function(){
         beforeEach('User LogIn ', () => {
@@ -250,9 +250,9 @@ describe ('Складські документи ', function(){
             })
         })
     })
-    ///***********ПРИХІД за ЗАМОВЛЕННЯМ***************************************************************************************************** */
+    /***********ПРИХІД за ЗАМОВЛЕННЯМ***************************************************************************************************** */
   
-    ///***********ПРИХІД ТОВАРУ***************************************************************************************************** */
+    /***********ПРИХІД ТОВАРУ***************************************************************************************************** */
     it('Прихід Товару від Постачальника (INC) / Створення нового документу / ', ()=>{
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
@@ -260,20 +260,21 @@ describe ('Складські документи ', function(){
         cy.get(':nth-child(6) > .styles-m__folderLink---2Myrv').click({force: true})
         cy.get(':nth-child(1) > :nth-child(2) > .ant-select > .ant-select-selection').should('have.text','Прихід від постачальника')
         cy.get('.ant-select > .ant-select-selection').eq(3).type('Exist')
-        cy.wait(2000);
+        cy.wait(1000);
         cy.get('.ant-select-dropdown-menu-item').first().click({force: true})
-        cy.wait(2000);
+        cy.wait(1000);
         cy.get('.ant-input').eq(3).clear().type('Коментарій Прихід від постачальника').should('have.text','Коментарій Прихід від постачальника')
         cy.get(':nth-child(3) > .ant-input').type('INC'+idProduct)
         cy.get(':nth-child(3) > :nth-child(1) > .ant-select > .ant-select-selection').click()
-        cy.wait(2000);
+        cy.wait(1000);
         cy.get('.ant-select-dropdown-menu-item-active').first().click({force: true})
         cy.wait(2000);
         cy.get(':nth-child(3) > :nth-child(2) > .ant-select > .ant-select-selection').click()
-        cy.wait(2000);
+        cy.wait(1000);
         cy.get('.ant-select-dropdown-menu-item-active').first().click({force: true})
         cy.get('.ant-badge > .anticon').last().click({force: true}) // дискетка 
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
+        cy.wait(2000);
     })
 
     it('Додавання створеного Товару до списку, редагування ціни', () => {
@@ -284,16 +285,20 @@ describe ('Складські документи ', function(){
         cy.wait(2000)
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
         cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})
-        cy.wait(2000);
+        cy.wait(1000);
         cy.get('.ant-input').eq(0).should('have.text','')
         cy.get('.ant-modal-body').find('.ant-input').first().type(idProduct) 
         cy.get('.ant-modal-body').find('.ant-input-number-input').eq(1).clear().type('10.9') 
+        cy.get('.ant-modal-body').find('.ant-input').last().click()
+        cy.wait(1000);
+        cy.get('.ant-modal-header').last().should('have.text','Вибір комірки')
+        cy.wait(1000);
+        cy.get('[data-row-key] > :nth-child(8) > .ant-btn').first().click({force: true})
+        cy.wait(1000);
         cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true})
         cy.wait(2000);
-        cy.get('.ant-modal-body').find('.ant-input').last().click()
-        cy.get('.ant-modal-header').last().should('have.text','Вибір комірки')
-        cy.get('[data-row-key] > :nth-child(8) > .ant-btn').first().click({force: true})
         cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true})
+        cy.wait(1000);
     })
 
     it('Перевід у статус Враховано Приходу Товару від Постачальника', () => {
