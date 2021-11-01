@@ -3,8 +3,8 @@
 const baseUrl = 'https://'+Cypress.env('url')+'my.carbook.pro';
 const textServise = 'Доставка Запчастин'
 var date = new Date();
-//const idProduct ='TEST'+date.getDate()+date.getMonth()+date.getMinutes()+date.getSeconds();
-const idProduct ='TEST'+'1103050'
+const idProduct ='TEST'+date.getDate()+date.getMonth()+date.getMinutes()+date.getSeconds();
+//const idProduct ='TEST'+'1103050'
 
 describe ('Складські документи ', function(){
         beforeEach('User LogIn ', () => {
