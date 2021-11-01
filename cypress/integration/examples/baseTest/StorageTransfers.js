@@ -4,7 +4,7 @@ const baseUrl = 'https://'+Cypress.env('url')+'my.carbook.pro';
 const textServise = 'Доставка Запчастин'
 var date = new Date();
 const idProduct ='TEST'+date.getDate()+date.getMonth()+date.getMinutes()+date.getSeconds();
-//const idProduct ='TEST'+'1103050'
+//const idProduct ='TEST'+'1105158'
 
 describe ('Складські документи ', function(){
         beforeEach('User LogIn ', () => {
@@ -553,26 +553,26 @@ describe ('Складські документи ', function(){
         cy.wait(2000);
     })
 
-    it('Оплата Повернення Постачальнику', () => {
-        cy.get('.styles-m__logo---2zDPJ').click()
-        cy.contains('Швидка навігація').click({force: true})
-        cy.get('h1').should('have.text','Швидка навігація')
-        cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(8) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
-        cy.get('.styles-m__header---2z2EP').find(':nth-child(1) > .ant-btn').should('have.text','Повернення постачальнику')
-        cy.wait(2000)
-        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
-        cy.get('div.ant-dropdown-trigger > span').click()
-        cy.get('.styles-m__header---2z2EP').find('.anticon-dollar').should('exist').first().click({force: true})
-        cy.get('.ant-modal-header').should('have.text','Касовий ордерЗвичайнийСервісне внесенняСервісна видача')
-        cy.wait(2000);
-        cy.get('.styles-m__buttonGroup---14_lS').find('.ant-btn').click()
-        cy.wait(2000);
-        cy.get('.styles-m__sumNumeral---KAUvr').find('span').last().should('have.text','0 грн.')
-        cy.get('.styles-m__header---2z2EP').find('.anticon-close').click()
-        cy.get('.styles-m__header---2z2EP').contains('Врах.').should('exist')
-    })
+    // // it('Оплата Повернення Постачальнику', () => {
+    // //     cy.get('.styles-m__logo---2zDPJ').click()
+    // //     cy.contains('Швидка навігація').click({force: true})
+    // //     cy.get('h1').should('have.text','Швидка навігація')
+    // //     cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(8) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+    // //     cy.get('.styles-m__header---2z2EP').find(':nth-child(1) > .ant-btn').should('have.text','Повернення постачальнику')
+    // //     cy.wait(2000)
+    // //     cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
+    // //     cy.get('div.ant-dropdown-trigger > span').click()
+    // //     cy.get('.styles-m__header---2z2EP').find('.anticon-dollar').should('exist').first().click({force: true})
+    // //     cy.get('.ant-modal-header').should('have.text','Касовий ордерЗвичайнийСервісне внесенняСервісна видача')
+    // //     cy.wait(2000);
+    // //     cy.get('.styles-m__buttonGroup---14_lS').find('.ant-btn').click()
+    // //     cy.wait(2000);
+    // //     cy.get('.styles-m__sumNumeral---KAUvr').find('span').last().should('have.text','0 грн.')
+    // //     cy.get('.styles-m__header---2z2EP').find('.anticon-close').click()
+    // //     cy.get('.styles-m__header---2z2EP').contains('Врах.').should('exist')
+    // // })
 
-    it('Відображення трансфера в списку Витрат на Складі ', () => {
+    it('Відображення документа у списку Витрат на Складі ', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
