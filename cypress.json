@@ -8,7 +8,7 @@
   
 
   "env": {
-    "url":"",
+    "url":"dev-",
     "TestLogin":"test@admin.com",
     "Login":"my@admin.com",
     "Password":"456789",
