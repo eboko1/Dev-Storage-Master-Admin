@@ -8,9 +8,9 @@
   
 
   "env": {
-    "url":"dev-",
+    "url":"test-",
     "TestLogin":"test@admin.com",
-    "Login":"my@admin.com",
+    "Login":"test@admin.com",
     "Password":"456789",
   
     "TestSpecialistLogin":"0502333355",

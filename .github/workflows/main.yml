@@ -1,4 +1,4 @@
-name: Base Tests
+name: Storage Docs Base Tests
 #off
 on:
   push:
