@@ -3,8 +3,8 @@
 const baseUrl = 'https://'+Cypress.env('url')+'my.carbook.pro';
 const textServise = 'Доставка Запчастин'
 var date = new Date();
-const idProduct ='TEST'+date.getDate()+date.getMonth()+date.getMinutes()+date.getSeconds();
-//const idProduct ='TEST'+'1105158'
+const idProduct ='TEST'+date.getDate()+date.getMonth()+date.getMinutes()//+date.getSeconds();
+//const idProduct ='TEST'+'2103227'
 
 describe ('Складські документи ', function(){
         beforeEach('User LogIn ', () => {
@@ -75,7 +75,8 @@ describe ('Складські документи ', function(){
         cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(1) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
         cy.wait(2000)
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
-        cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})
+        cy.wait(2000);
+        cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})///////////
         cy.wait(2000);
         cy.get('.ant-input').eq(0).should('have.text','')
         cy.get('.ant-modal-body').find('.ant-input').first().type(idProduct) 
@@ -91,7 +92,8 @@ describe ('Складські документи ', function(){
         cy.get('h1').should('have.text','Швидка навігація')
         cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(1) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
-        cy.get('div.ant-dropdown-trigger > span').click()
+        cy.wait(2000);
+        cy.get('div.ant-dropdown-trigger > span').click() /////////
         cy.wait(2000);
         cy.get('.ant-dropdown-menu-item').contains('Врах.').click()
         cy.wait(2000);
@@ -146,7 +148,8 @@ describe ('Складські документи ', function(){
         cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(3) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
         cy.wait(2000)
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
-        cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})
+        cy.wait(2000);
+        cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})///////////
         cy.wait(2000);
         cy.get('.ant-input').eq(0).should('have.text','')
         cy.get('.ant-modal-body').find('.ant-input').first().type(idProduct) 
@@ -203,13 +206,14 @@ describe ('Складські документи ', function(){
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
     })     
         
-    it('Вибір створеного Товару з модалки Каталог', () => {
+    it('Вибір створеного Товару з модалки Каталог Прихід за Замовленням', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
         cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(2) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
         cy.wait(2000)
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
+        cy.wait(2000);
         cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})
         cy.wait(2000);
         cy.get('.ant-input').eq(0).should('have.text','')
@@ -227,6 +231,7 @@ describe ('Складські документи ', function(){
         cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(2) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
         cy.wait(2000)
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
+        cy.wait(2000)
         cy.get('div.ant-dropdown-trigger > span').click()
         cy.wait(2000);
         cy.get('.ant-dropdown-menu-item').contains('Врах.').click()
@@ -235,7 +240,7 @@ describe ('Складські документи ', function(){
         cy.get('.styles-m__header---2z2EP').find('.anticon-close').click()
     })
 
-    it('Відображення документа в списку Прихіди за замовленнями', () => {
+    it('Відображення документа в списку Прихoди за замовленнями', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
@@ -284,8 +289,9 @@ describe ('Складські документи ', function(){
         cy.get(':nth-child(6) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
         cy.wait(2000)
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
+        cy.wait(2000);
         cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})
-        cy.wait(1000);
+        cy.wait(2000);
         cy.get('.ant-input').eq(0).should('have.text','')
         cy.get('.ant-modal-body').find('.ant-input').first().type(idProduct) 
         cy.get('.ant-modal-body').find('.ant-input-number-input').eq(1).clear().type('10.9') 
@@ -308,6 +314,7 @@ describe ('Складські документи ', function(){
         cy.get(':nth-child(6) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
         cy.wait(2000)
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
+        cy.wait(2000);
         cy.get('div.ant-dropdown-trigger > span').click()
         cy.wait(2000);
         cy.get('.ant-dropdown-menu-item').contains('Врах.').click()
@@ -517,7 +524,7 @@ describe ('Складські документи ', function(){
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
     })
 
-    it('Вибір Товару з модалки Каталог', () => {
+    it('Вибір Товару з модалки Каталог Повернення Постачальнику (STR)', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
@@ -525,6 +532,7 @@ describe ('Складські документи ', function(){
         cy.get('.styles-m__header---2z2EP').find(':nth-child(1) > .ant-btn').should('have.text','Повернення постачальнику')
         cy.wait(2000)
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
+        cy.wait(2000);
         cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})
         cy.wait(2000);
         cy.get('.ant-input').eq(0).should('have.text','')
@@ -545,6 +553,7 @@ describe ('Складські документи ', function(){
         cy.get('.styles-m__header---2z2EP').find(':nth-child(1) > .ant-btn').should('have.text','Повернення постачальнику')
         cy.wait(2000)
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
+        cy.wait(2000);
         cy.get('div.ant-dropdown-trigger > span').click()
         cy.wait(2000);
         cy.get('.ant-dropdown-menu-item').contains('Врах.').click()
@@ -553,26 +562,7 @@ describe ('Складські документи ', function(){
         cy.wait(2000);
     })
 
-    // // it('Оплата Повернення Постачальнику', () => {
-    // //     cy.get('.styles-m__logo---2zDPJ').click()
-    // //     cy.contains('Швидка навігація').click({force: true})
-    // //     cy.get('h1').should('have.text','Швидка навігація')
-    // //     cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(8) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
-    // //     cy.get('.styles-m__header---2z2EP').find(':nth-child(1) > .ant-btn').should('have.text','Повернення постачальнику')
-    // //     cy.wait(2000)
-    // //     cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
-    // //     cy.get('div.ant-dropdown-trigger > span').click()
-    // //     cy.get('.styles-m__header---2z2EP').find('.anticon-dollar').should('exist').first().click({force: true})
-    // //     cy.get('.ant-modal-header').should('have.text','Касовий ордерЗвичайнийСервісне внесенняСервісна видача')
-    // //     cy.wait(2000);
-    // //     cy.get('.styles-m__buttonGroup---14_lS').find('.ant-btn').click()
-    // //     cy.wait(2000);
-    // //     cy.get('.styles-m__sumNumeral---KAUvr').find('span').last().should('have.text','0 грн.')
-    // //     cy.get('.styles-m__header---2z2EP').find('.anticon-close').click()
-    // //     cy.get('.styles-m__header---2z2EP').contains('Врах.').should('exist')
-    // // })
-
-    it('Відображення документа у списку Витрат на Складі ', () => {
+    it('Відображення документа Повернення Постачальнику (STR) у списку Витрат на Складі ', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
@@ -589,7 +579,7 @@ describe ('Складські документи ', function(){
         })
     })
 
-    it('Завантаження документа', () => {
+    it('Завантаження документа Повернення Постачальнику (STR)', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
