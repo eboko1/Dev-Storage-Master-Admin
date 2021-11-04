@@ -3,8 +3,8 @@
 const baseUrl = 'https://'+Cypress.env('url')+'my.carbook.pro';
 const textServise = 'Доставка Запчастин'
 var date = new Date();
-const idProduct ='TEST'+date.getDate()+date.getMonth()+date.getMinutes()//+date.getSeconds();
-//const idProduct ='TEST'+'2103227'
+//const idProduct ='TEST'+date.getDate()+date.getMonth()+date.getMinutes()//+date.getSeconds();
+const idProduct ='TEST'+'31045'
 
 describe ('Складські документи ', function(){
         beforeEach('User LogIn ', () => {
@@ -16,33 +16,33 @@ describe ('Складські документи ', function(){
             cy.get('.styles-m__title---Nwr2X').contains('Календар Завантаження');
         });
 
-        it('Створення нового Товару/Product id='+idProduct , ()=>{
-            cy.get('.ant-menu-submenu-title').contains('Довідник').click()
-            cy.wait(2000);
-            cy.get('.ant-menu-submenu').contains('Товари').click()
-            cy.get('.ant-btn').contains('Додати').click({force: true})
-            cy.get('#code').type(idProduct)
-            cy.get(':nth-child(3) > .ant-col-15 > .ant-form-item-control > .ant-form-item-children > .ant-select > .ant-select-selection').type('100 Plus')
-            cy.wait(2000);
-            cy.get('.ant-select-dropdown-menu-item').click({force: true})
-            cy.wait(2000);
-            cy.get(':nth-child(4) > .ant-col-15 > .ant-form-item-control > .ant-form-item-children > .ant-select > .ant-select-selection').type('1020201')
-            cy.wait(2000);
-            cy.get(':nth-child(3) > :nth-child(1) > :nth-child(3) > .ant-select-tree-treenode-switcher-open > .ant-select-tree-child-tree > li > .ant-select-tree-node-content-wrapper').click({force: true})
-            cy.get('#tradeCode').type('0000000000')
-            cy.get('#certificate').type('00000000000000000')
-            cy.get('.ant-form').find('button').click()   //.contains('Застосувати')
-            cy.wait(2000);
-            cy.get(':nth-child(1) > :nth-child(1) > div > .ant-input').first().type(idProduct)
-            cy.wait(3000);
-            cy.get('.ant-table-content td').first().should('exist')
-            cy.wait(3000);
-            cy.get('a > div').first().invoke('text')
-              .then (text => {
-                  cy.log(text)
-                expect(text).to.eq(idProduct)
-           })
-        })
+        // it('Створення нового Товару/Product id='+idProduct , ()=>{
+        //     cy.get('.ant-menu-submenu-title').contains('Довідник').click()
+        //     cy.wait(2000);
+        //     cy.get('.ant-menu-submenu').contains('Товари').click()
+        //     cy.get('.ant-btn').contains('Додати').click({force: true})
+        //     cy.get('#code').type(idProduct)
+        //     cy.get('.ant-form').find('.ant-select-selection').eq(0).type('100 Plus')
+        //     cy.wait(2000);
+        //     cy.get('.ant-select-dropdown-menu-item').click({force: true})
+        //     cy.wait(2000);
+        //     cy.get('.ant-form').find('.ant-select-selection').eq(1).type('1020201')
+        //     cy.wait(2000);
+        //     cy.get(':nth-child(3) > :nth-child(1) > :nth-child(3) > .ant-select-tree-treenode-switcher-open > .ant-select-tree-child-tree > li > .ant-select-tree-node-content-wrapper').click({force: true})
+        //     cy.get('#tradeCode').type('0000000000')
+        //     cy.get('#certificate').type('00000000000000000')
+        //     cy.get('.ant-form').find('button').click()   //.contains('Застосувати')
+        //     cy.wait(2000);
+        //     cy.get(':nth-child(1) > :nth-child(1) > div > .ant-input').first().type(idProduct)
+        //     cy.wait(3000);
+        //     cy.get('.ant-table-content td').first().should('exist')
+        //     cy.wait(3000);
+        //     cy.get('a > div').first().invoke('text')
+        //       .then (text => {
+        //           cy.log(text)
+        //         expect(text).to.eq(idProduct)
+        //    })
+        // })
 /////**************************************************************************************************************************** */
 
   it('Замовлення Постачальнику (ORD) / Створення нового документу ', ()=>{
@@ -52,7 +52,7 @@ describe ('Складські документи ', function(){
         cy.get(':nth-child(2) > .styles-m__blockItems---2q9Ea > :nth-child(1) > .styles-m__folderLink---2Myrv').click({force: true})
         cy.get(':nth-child(1) > :nth-child(2) > .ant-select > .ant-select-selection').should('have.text','Замовлення постачальнику')
         cy.get('.ant-select > .ant-select-selection').eq(3).type('Exist')
-        cy.wait(2000);
+        cy.wait(2000);//
         cy.get('.ant-select-dropdown-menu-item').first().click({force: true})
         cy.wait(2000);
         cy.get('.ant-input').eq(3).clear().type('Коментарій Замовлення постачальнику').should('have.text','Коментарій Замовлення постачальнику')
