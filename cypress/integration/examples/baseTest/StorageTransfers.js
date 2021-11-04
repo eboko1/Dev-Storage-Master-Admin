@@ -4,7 +4,7 @@ const baseUrl = 'https://'+Cypress.env('url')+'my.carbook.pro';
 const textServise = 'Доставка Запчастин'
 var date = new Date();
 const idProduct ='TEST'+date.getDate()+date.getMonth()+date.getMinutes()//+date.getSeconds();
-//const idProduct ='TEST'+'41028'
+//const idProduct ='TEST'+'11043'
 
 describe ('Складські документи ', function(){
         beforeEach('User LogIn ', () => {
@@ -82,7 +82,7 @@ describe ('Складські документи ', function(){
         cy.get('.ant-modal-body').find('.ant-input').first().type(idProduct) 
         cy.wait(2000);
         cy.get('.ant-modal-body').find('.ant-input-number').first().type('111.11') 
-        cy.get('.ant-modal-body').find('.ant-input-number-input').eq(1).clear().type('10.88')
+        cy.get('.ant-modal-body').find('.ant-input-number-input').eq(1).clear().type('100.88')
         cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true})
         cy.wait(2000);
     })
@@ -129,7 +129,7 @@ describe ('Складські документи ', function(){
     cy.get(':nth-child(2) > .ant-select > .ant-select-selection > .ant-select-selection__rendered > .ant-select-selection-selected-value > span').should('have.text','Замовлення постачальнику')
 })
 
-    /// //*************КОРИГУВАННЯ ЗАМОВЛЕННЯ*************************************************************************************************** */
+//     /// //*************КОРИГУВАННЯ ЗАМОВЛЕННЯ*************************************************************************************************** */
      it('Коригування Замовлення (BOR) через +', ()=>{
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
@@ -150,6 +150,7 @@ describe ('Складські документи ', function(){
         cy.wait(2000);
         cy.get('.ant-select-dropdown-menu-item-active').first().click({force: true})
         cy.get('.ant-badge > .anticon').last().click({force: true}) // дискетка 
+        cy.wait(1000);
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
     })     
         
@@ -288,7 +289,7 @@ describe ('Складські документи ', function(){
         cy.wait(2000)
         cy.get(':nth-child(2) > .ant-select > .ant-select-selection > .ant-select-selection__rendered > .ant-select-selection-selected-value > span').should('have.text','Прихід за замовленням')
     })
-    /////***********ПРИХІД за ЗАМОВЛЕННЯМ***************************************************************************************************** */
+//     /////***********ПРИХІД за ЗАМОВЛЕННЯМ***************************************************************************************************** */
   
    //// /***********ПРИХІД ТОВАРУ***************************************************************************************************** */
     it('Прихід Товару від Постачальника (INC) через + ', ()=>{
@@ -303,6 +304,7 @@ describe ('Складські документи ', function(){
         cy.wait(1000);
         cy.get('.ant-input').eq(3).clear().type('Коментарій Прихід від постачальника').should('have.text','Коментарій Прихід від постачальника')
         cy.get(':nth-child(3) > .ant-input').type('INC'+idProduct)
+        cy.wait(2000);
         cy.get(':nth-child(3) > :nth-child(1) > .ant-select > .ant-select-selection').click()
         cy.wait(1000);
         cy.get('.ant-select-dropdown-menu-item-active').first().click({force: true})
@@ -326,7 +328,8 @@ describe ('Складські документи ', function(){
         cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})
         cy.wait(2000);
         cy.get('.ant-input').eq(0).should('have.text','')
-        cy.get('.ant-modal-body').find('.ant-input').first().type(idProduct) 
+        cy.get('.ant-modal-body').find('.ant-input').first().type(idProduct)
+        cy.wait(2000) 
         cy.get('.ant-modal-body').find('.ant-input-number-input').eq(1).clear().type('10.9') 
         cy.get('.ant-modal-body').find('.ant-input').last().click()
         cy.wait(1000);
@@ -362,8 +365,8 @@ describe ('Складські документи ', function(){
         cy.get(':nth-child(6) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
         cy.get('.styles-m__header---2z2EP').find('.anticon-dollar').should('exist').first().click({force: true})
-        cy.get('.ant-modal-header').should('have.text','Касовий ордерЗвичайнийСервісне внесенняСервісна видача')
         cy.wait(2000)
+        cy.get('.ant-modal-header').should('have.text','Касовий ордерЗвичайнийСервісне внесенняСервісна видача')
         cy.get('.ant-modal-footer').find('.ant-btn').click({force: true})
         cy.wait(2000)
         cy.get('.styles-m__sumNumeral---KAUvr').find('span').should('have.text','0 грн.')
@@ -423,7 +426,7 @@ describe ('Складські документи ', function(){
 
      /////***********ПРИХІД ТОВАРУ***************************************************************************************************** */
 
-      /////***********ПРИХІД Послуги***************************************************************************************************** */
+      ///***********ПРИХІД Послуги***************************************************************************************************** */
     it('Прихід Послуги (SRV) через кнопку +', ()=>{
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
@@ -460,6 +463,7 @@ describe ('Складські документи ', function(){
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
         cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})
         cy.get('.ant-modal-body').find('.ant-input').eq(0).should('have.text','').type(textServise)
+        cy.wait(2000)
         ///// cy.get('.ant-modal-body').find('.ant-input').eq(1).click()                                  // джерело
         cy.get(':nth-child(4) > .ant-input-number > .ant-input-number-input-wrap > .ant-input-number-input').should('have.value','1,00')
         cy.get(':nth-child(5) > .ant-input-number > .ant-input-number-input-wrap > .ant-input-number-input').should('have.value','1,00')
@@ -547,9 +551,9 @@ describe ('Складські документи ', function(){
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
         cy.get('.styles-m__paper---3d-H1').children().eq(1).find(':nth-child(7) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
-        cy.wait(2000)
+        cy.wait(3000)
         cy.get('.styles-m__header---2z2EP').find(':nth-child(1) > .ant-btn').should('have.text','Послуги')
-        cy.wait(2000)
+        cy.wait(1000)
         cy.get('.ant-btn').contains('Додати').click({force: true})
         cy.wait(2000)
         cy.get(':nth-child(2) > .ant-select > .ant-select-selection > .ant-select-selection__rendered > .ant-select-selection-selected-value > span').should('have.text','Послуги')
@@ -559,7 +563,7 @@ describe ('Складські документи ', function(){
 
   //////***********Повернення Постачальнику***************************************************************************************************** */
     
-  it('Повернення Постачальнику (STR) через +', ()=>{
+  it('Повернення Постачальнику (SRT) через +', ()=>{
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
@@ -570,7 +574,7 @@ describe ('Складські документи ', function(){
         cy.get('.ant-select-dropdown-menu-item').first().click({force: true})
         cy.wait(2000);
         cy.get('.ant-input').eq(3).clear().type('Коментарій Повернення постачальнику').should('have.text','Коментарій Повернення постачальнику')
-        cy.get(':nth-child(3) > .ant-input').type('STR'+idProduct)
+        cy.get(':nth-child(3) > .ant-input').type('SRT'+idProduct)
         cy.get(':nth-child(3) > :nth-child(1) > .ant-select > .ant-select-selection').click()
         cy.wait(2000);
         cy.get('.ant-select-dropdown-menu-item-active').first().click({force: true})
@@ -582,7 +586,7 @@ describe ('Складські документи ', function(){
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
     })
 
-    it('Додавання ЗЧ в документ Повернення Постачальнику (STR)', () => {
+    it('Додавання ЗЧ в документ Повернення Постачальнику (SRT)', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
@@ -620,7 +624,7 @@ describe ('Складські документи ', function(){
         cy.wait(2000);
     })
 
-    it('Відображення документа Повернення Постачальнику (STR) у списку Витрат на Складі ', () => {
+    it('Відображення документа Повернення Постачальнику (SRT) у списку Витрат на Складі ', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
@@ -637,7 +641,7 @@ describe ('Складські документи ', function(){
         })
     })
 
-    it('Завантаження документа Повернення Постачальнику (STR)', () => {
+    it('Завантаження документа Повернення Постачальнику (SRT)', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
@@ -662,7 +666,7 @@ describe ('Складські документи ', function(){
         cy.get('.ant-form').should('exist')
     })
 
-    it('Створення документа Повернення Постачальнику (STR) через кнопку Додати', () => {
+    it('Створення документа Повернення Постачальнику (SRT) через кнопку Додати', () => {
         cy.get('.styles-m__logo---2zDPJ').click()
         cy.contains('Швидка навігація').click({force: true})
         cy.get('h1').should('have.text','Швидка навігація')
@@ -673,7 +677,7 @@ describe ('Складські документи ', function(){
         cy.wait(2000)
         cy.get(':nth-child(2) > .ant-select > .ant-select-selection > .ant-select-selection__rendered > .ant-select-selection-selected-value > span').should('have.text','Повернення постачальнику')
     })
-      //////***********Продаж Клієнту***************************************************************************************************** */
+//       //////***********Продаж Клієнту***************************************************************************************************** */
     
   it('Витрати Товару (OUT) / Продаж Клієнту через +', ()=>{
         cy.get('.styles-m__logo---2zDPJ').click()
@@ -745,7 +749,7 @@ describe ('Складські документи ', function(){
         cy.get('.styles-m__paper---3d-H1').children().eq(1).find(':nth-child(11) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
         cy.wait(2000);
-        cy.get('.styles-m__sumNumeral---KAUvr').find('p').should('have.text','0 грн.')
+        cy.get('.styles-m__sumNumeral---KAUvr').find('span').should('have.text','0 грн.')
         cy.get('.styles-m__header---2z2EP').find('.anticon-close').click()
     })
 
