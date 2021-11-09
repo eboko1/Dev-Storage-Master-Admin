@@ -780,41 +780,289 @@ describe ('Складські документи ', function(){
         cy.get(':nth-child(2) > .ant-select > .ant-select-selection > .ant-select-selection__rendered > .ant-select-selection-selected-value > span').should('have.text','Продаж')
     })
 
-    /////***********Продаж Клієнту***************************************************************************************************** *//
+    ///***********Продаж Клієнту***************************************************************************************************** *//
 
-    //////***********Повернення від Клієнта***************************************************************************************************** */
+    ////***********Повернення від Клієнта***************************************************************************************************** */
 
-    //////***********Повернення від Клієнта***************************************************************************************************** */
+  it('Прихід Товару (CRT) / Повернення від Клієнта через +', ()=>{
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(13) > .styles-m__folderLink---2Myrv').click({force: true})
+        cy.get(':nth-child(1) > :nth-child(2) > .ant-select > .ant-select-selection').should('have.text','Повернення від клієнта')
+        cy.get('.ant-select > .ant-select-selection').eq(3).type('Vika')
+        cy.wait(2000);
+        cy.get('.ant-select-dropdown-menu-item').first().click({force: true})
+        cy.wait(2000);
+        cy.get('.ant-input').eq(3).clear().type('Коментарій Повернення від клієнта').should('have.text','Коментарій Повернення від клієнта')
+        cy.get(':nth-child(3) > .ant-input').type('CRT'+idProduct)
+        cy.get(':nth-child(3) > :nth-child(1) > .ant-select > .ant-select-selection').click()
+        cy.wait(2000);
+        cy.get('.ant-select-dropdown-menu-item-active').first().click({force: true})
+        cy.wait(2000);
+        cy.get(':nth-child(3) > :nth-child(2) > .ant-select > .ant-select-selection').click()
+        cy.wait(2000);
+        cy.get('.ant-select-dropdown-menu-item-active').first().click({force: true})
+        cy.get('.ant-badge > .anticon').last().click({force: true}) // дискетка 
+        cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
+    })
 
-    //////***********Витрати з НЗ***************************************************************************************************** */
-    // //   it('Витрати з НЗ / Створення нового Ремонту через Швидку навігацію', ()=>{
-    // //         cy.get('.styles-m__logo---2zDPJ').click()
-    // //         cy.contains('Швидка навігація').click({force: true})
-    // //         cy.get('h1').should('have.text','Швидка навігація')
-    // //         cy.get(':nth-child(1) > .styles-m__blockItems---2q9Ea > :nth-child(1) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
-    // //         cy.get('.styles-m__title---Nwr2X > span').should('have.text','Нові')
-    // //         cy.get('.styles-m__description---1eHYb > span').should('have.text','Керування Вашими замовленнями')
-    // //         cy.get('.styles-m__header---2z2EP').find('.ant-btn').contains('Додати').first().click({force: true})
-    // //         cy.wait(2000);
-    // //         cy.get('#searchClientQuery').type('Vika')
-    // //         cy.get('.ant-select > .ant-select-selection').eq(3).type('Vika')
-    // //         cy.get('.ant-select-dropdown-menu-item').last().click({force: true})
-    // //         cy.wait(2000);
-    // //         cy.get('.ant-table-row > :nth-child(1)').first().click({force: true})
-    // //         cy.get('.styles-m__header---2z2EP').find('.ant-btn').contains('Додати').first().click({force: true})
-    // //         cy.wait(2000);
-    // //         cy.get('.ant-tabs-nav').contains('Запчастини').first().click({force: true})
-    // //         cy.get('.styles-m__headerActions---29OlS > [title="Додати"]').first().click({force: true})
-    // //         cy.wait(2000);
+    it('Додавання ЗЧ через модалку Каталог / Повернення від Клієнта', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(13) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.wait(2000)
+        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
+        cy.wait(2000);
+        cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})///////////
+        cy.wait(2000);
+        cy.get('.ant-input').eq(0).should('have.text','')
+        cy.get('.ant-modal-body').find('.ant-input').first().type(idProduct) 
+        cy.get('.ant-modal-body').find('.ant-input-number').first().type('111.11') 
+        cy.get('.ant-modal-body').find('.ant-input').eq(3).click({force: true})           ///комірка
+        cy.wait(2000);
+        cy.get('[data-row-key] > :nth-child(8) > .ant-btn').first().click({force: true}) ///комірка
+        cy.wait(2000);
+        cy.get('.ant-modal-body').find('.ant-input-number-input').eq(1).clear().type('1.22')
+        cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true})
+        cy.wait(2000);
+    })
 
-        
-    // //     })
-    //////***********Витрати з НЗ***************************************************************************************************** */
+    it('Оплата та Перевід в статус враховано Прихід Товару (CRT)/ Повернення від клієнта ', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(13) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
+        cy.wait(2000);
+        cy.get('div.ant-dropdown-trigger > span').click() /////////
+        cy.wait(2000);
+        cy.get('.ant-dropdown-menu-item').contains('Врах.').click()
+        cy.wait(2000);
+        cy.get('.styles-m__title---Nwr2X').contains('Врах.').should('exist')
+//     })
 
-    //////***********Плюс по Інвент. / Надлишки по інвестиції***************************************************************************************************** */
-    //////***********Плюс по Інвент. / Надлишки по інвестиції***************************************************************************************************** */
+    it('Перевірка 0 Залишку Прихід Товару (CRT)/ Повернення від клієнта ', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get('.styles-m__paper---3d-H1').children().eq(1).find(':nth-child(13) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
+        cy.wait(2000);
+        cy.get('.styles-m__sumNumeral---KAUvr').last().should('have.text','0 грн.')
+        cy.get('.styles-m__header---2z2EP').find('.anticon-close').click()
+    })
 
-    //////***********Мінус по Інвент. / Недостача по інвестиції***************************************************************************************************** */
-    //////***********Мінус по Інвент. / Недостача по інвестиції***************************************************************************************************** */
+    it('Відображення документа в списку Прихід Товару (CRT)/ Повернення від клієнта / Пошук по номеру документа /  ', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(13) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.wait(2000)
+        cy.get('[data-row-key] > :nth-child(1) > a').first().invoke('text').then(text =>{
+            cy.log(text)
+            const numArr = text.split('-') 
+            cy.get('.styles-m__paper---3d-H1').find('.ant-input').type(numArr[numArr.length-1])
+            cy.get('.ant-table-row > :nth-child(1) > a').first().invoke('text').then( textFind =>{
+                expect(text).to.eq(textFind)
+            })
+        })
+   })
 
+   it('Створення документа Прихід Товару (CRT)/ Повернення від клієнта через кнопку Додати', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(13) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.wait(2000)
+        cy.get('.ant-btn').contains('Додати').click({force: true})
+        cy.wait(2000)
+        cy.get(':nth-child(2) > .ant-select > .ant-select-selection > .ant-select-selection__rendered > .ant-select-selection-selected-value > span').should('have.text','Повернення від клієнта')
+    })
+    ////***********Прихід / Повернення від Клієнта***************************************************************************************************** */
+
+    ////***********Витрати з НЗ***************************************************************************************************** */
+    //   it('Витрати з НЗ / Створення нового Ремонту через Швидку навігацію', ()=>{
+    //         cy.get('.styles-m__logo---2zDPJ').click()
+    //         cy.contains('Швидка навігація').click({force: true})
+    //         cy.get('h1').should('have.text','Швидка навігація')
+    //         cy.get(':nth-child(1) > .styles-m__blockItems---2q9Ea > :nth-child(1) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+    //         cy.get('.styles-m__title---Nwr2X > span').should('have.text','Нові')
+    //         cy.get('.styles-m__description---1eHYb > span').should('have.text','Керування Вашими замовленнями')
+    //         cy.get('.styles-m__header---2z2EP').find('.ant-btn').contains('Додати').first().click({force: true})
+    //         cy.wait(2000);
+    //         cy.get('#searchClientQuery').type('Vika')
+    //         cy.get('.ant-select > .ant-select-selection').eq(3).type('Vika')
+    //         cy.get('.ant-select-dropdown-menu-item').last().click({force: true})
+    //         cy.wait(2000);
+    //         cy.get('.ant-table-row > :nth-child(1)').first().click({force: true})
+    //         cy.get('.styles-m__header---2z2EP').find('.ant-btn').contains('Додати').first().click({force: true})
+    //         cy.wait(2000);
+    //         cy.get('.ant-tabs-nav').contains('Запчастини').first().click({force: true})
+    //         cy.get('.styles-m__headerActions---29OlS > [title="Додати"]').first().click({force: true})
+    //         cy.wait(2000);
+    //     })
+    ////***********Витрати з НЗ***************************************************************************************************** */
+
+    ////***********Плюс по Інвент. / Надлишки по інвестиції***************************************************************************************************** */
+   
+  it('Плюс по Інвент. (STP) / через +', ()=>{
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(10) > .styles-m__folderLink---2Myrv').click({force: true})
+        cy.get('.ant-select > .ant-select-selection').eq(2).should('have.text','Надлишки по iнвент.')
+        cy.get('.ant-input').eq(3).clear().type('Коментарій Плюс по Інвент.').should('have.text','Коментарій Плюс по Інвент.')
+        cy.get(':nth-child(3) > .ant-input').type('STP'+idProduct)
+        cy.wait(2000);
+        cy.get('.ant-badge > .anticon').last().click({force: true}) // дискетка 
+        cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
+    })
+
+    it('Додавання ЗЧ через модалку Каталог / Плюс/Надлишки по Інвент. (STP)', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(10) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.wait(2000)
+        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
+        cy.wait(2000);
+        cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})///////////
+        cy.wait(2000);
+        cy.get('.ant-input').eq(0).should('have.text','')
+        cy.get('.ant-modal-body').find('.ant-input').first().type(idProduct) 
+        cy.get('.ant-modal-body').find('.ant-input-number').first().type('111.11') 
+        cy.get('.ant-modal-body').find('.ant-input').eq(2).click({force: true})           ///комірка
+        cy.wait(2000);
+        cy.get('[data-row-key] > :nth-child(8) > .ant-btn').first().click({force: true}) ///комірка
+        cy.wait(2000);
+        cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true})
+        cy.wait(2000);
+    })
+
+
+    it('Оплата та Перевід в статус враховано Плюс/Надлишки по Інвент. (STP)', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(10) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
+        cy.wait(2000);
+        cy.get('div.ant-dropdown-trigger > span').click() /////////
+        cy.wait(2000);
+        cy.get('.ant-dropdown-menu-item').contains('Врах.').click()
+        cy.wait(2000);
+        cy.get('.styles-m__title---Nwr2X').contains('Врах.').should('exist')
+    })
+
+    it('Відображення документа в списку Плюс/Надлишки по Інвент. (STP)', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(10) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.wait(2000)
+        cy.get(':nth-child(1) > .ant-btn').should('have.text','Надлишки по iнвент.')
+        cy.get('[data-row-key] > :nth-child(1) > a').first().invoke('text').then(text =>{
+            cy.log(text)
+            const numArr = text.split('-') 
+            cy.get('.styles-m__paper---3d-H1').find('.ant-input').type(numArr[numArr.length-1])
+            cy.get('.ant-table-row > :nth-child(1) > a').first().invoke('text').then( textFind =>{
+                expect(text).to.eq(textFind)
+            })
+        })
+   })
+
+   it('Створення документа  Плюс/Надлишки по Інвент. (STP)', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(10) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.wait(2000)
+        cy.get('.ant-btn').contains('Додати').click({force: true})
+        cy.wait(2000)
+        cy.get(':nth-child(2) > .ant-select > .ant-select-selection > .ant-select-selection__rendered > .ant-select-selection-selected-value > span').should('have.text','Надлишки по iнвент.')
+    })
+    ////***********Плюс по Інвент. / Надлишки по інвестиції***************************************************************************************************** */
+
+    ////***********Мінус по Інвент. / Недостача по інвестиції***************************************************************************************************** */
+   
+    it('Мінус по Інвент. (STM) / через +', ()=>{
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(15) > .styles-m__folderLink---2Myrv').click({force: true})
+        cy.get('.ant-select > .ant-select-selection').eq(2).should('have.text','Недостача по iнвент.')
+        cy.get('.ant-input').eq(3).clear().type('Коментарій Мінус по Інвент.').should('have.text','Коментарій Мінус по Інвент.')
+        cy.get(':nth-child(3) > .ant-input').type('STM'+idProduct)
+        cy.wait(2000);
+        cy.get('.ant-badge > .anticon').last().click({force: true}) // дискетка 
+        cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
+    })
+
+    it('Додавання ЗЧ через модалку Каталог Мінус/Недостача по Інвент.(STM)', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(15) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.wait(2000)
+        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
+        cy.wait(2000);
+        cy.get('.ant-table-row > :nth-child(1) > .ant-btn').first().click({force: true})///////////
+        cy.wait(2000);
+        cy.get('.ant-input').eq(0).should('have.text','')
+        cy.get('.ant-modal-body').find('.ant-input').first().type(idProduct) 
+        cy.get('.ant-modal-body').find('.ant-input-number').first().type('111.11') 
+        cy.get('.ant-modal-body').find('.ant-input').eq(2).click({force: true})           ///комірка
+        cy.wait(2000);
+        cy.get('[data-row-key] > :nth-child(8) > .ant-btn').first().click({force: true}) ///комірка
+        cy.wait(2000);
+        cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true})
+        cy.wait(2000);
+    })
+
+
+    it('Оплата та Перевід в статус враховано Мінус/Недостача по Інвент.(STM)', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(15) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})
+        cy.wait(2000);
+        cy.get('div.ant-dropdown-trigger > span').click() /////////
+        cy.wait(2000);
+        cy.get('.ant-dropdown-menu-item').contains('Врах.').click()
+        cy.wait(2000);
+        cy.get('.styles-m__title---Nwr2X').contains('Врах.').should('exist')
+    })
+
+    it('Відображення документа в списку Мінус/Недостача по Інвент.(STM)', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(15) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.wait(2000)
+        cy.get(':nth-child(1) > .ant-btn').should('have.text','Недостача по iнвент.')
+        cy.get('[data-row-key] > :nth-child(1) > a').first().invoke('text').then(text =>{
+            cy.log(text)
+            const numArr = text.split('-') 
+            cy.get('.styles-m__paper---3d-H1').find('.ant-input').type(numArr[numArr.length-1])
+            cy.get('.ant-table-row > :nth-child(1) > a').first().invoke('text').then( textFind =>{
+                expect(text).to.eq(textFind)
+            })
+        })
+   })
+
+   it('Створення документа Мінус/Недостача по Інвент.(STM)', () => {
+        cy.get('.styles-m__logo---2zDPJ').click()
+        cy.contains('Швидка навігація').click({force: true})
+        cy.get('h1').should('have.text','Швидка навігація')
+        cy.get(':nth-child(15) > .styles-m__buttonLink---1D7wr > .ant-btn').click({force: true})
+        cy.wait(2000)
+        cy.get('.ant-btn').contains('Додати').click({force: true})
+        cy.wait(2000)
+        cy.get(':nth-child(2) > .ant-select > .ant-select-selection > .ant-select-selection__rendered > .ant-select-selection-selected-value > span').should('have.text','Недостача по iнвент.')
+    })
+    ////***********Мінус по Інвент. / Недостача по інвестиції***************************************************************************************************** */
+    })
 })
