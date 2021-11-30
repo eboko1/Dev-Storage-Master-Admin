@@ -65,6 +65,7 @@ describe ('Складські документи ', function(){
         cy.wait(2000);
         cy.get('.ant-select-dropdown-menu-item-active').first().click({force: true})
         cy.get('.ant-badge > .anticon').last().click({force: true}) // дискетка 
+        cy.wait(2000);
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
     })
 
@@ -226,6 +227,7 @@ describe ('Складські документи ', function(){
         cy.wait(2000);
         cy.get('.ant-select-dropdown-menu-item-active').first().click({force: true})
         cy.get('.ant-badge > .anticon').last().click({force: true}) // дискетка 
+        cy.wait(2000);
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
     })     
         
@@ -313,6 +315,7 @@ describe ('Складські документи ', function(){
         cy.wait(1000);
         cy.get('.ant-select-dropdown-menu-item-active').first().click({force: true})
         cy.get('.ant-badge > .anticon').last().click({force: true}) // дискетка 
+        cy.wait(1000);
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
         cy.wait(2000);
     })
@@ -447,6 +450,7 @@ describe ('Складські документи ', function(){
         cy.wait(2000);
         cy.get('.ant-select-dropdown-menu-item-active').first().click({force: true})
         cy.get('.ant-badge > .anticon').last().click({force: true}) // дискетка 
+        cy.wait(2000);
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
     })
 
@@ -583,6 +587,7 @@ describe ('Складські документи ', function(){
         cy.wait(2000);
         cy.get('.ant-select-dropdown-menu-item-active').first().click({force: true})
         cy.get('.ant-badge > .anticon').last().click({force: true}) // дискетка 
+        cy.wait(2000);
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
     })
 
@@ -699,6 +704,7 @@ describe ('Складські документи ', function(){
         cy.wait(2000);
         cy.get('.ant-select-dropdown-menu-item-active').first().click({force: true})
         cy.get('.ant-badge > .anticon').last().click({force: true}) // дискетка 
+        cy.wait(2000);
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
     })
 
@@ -804,6 +810,7 @@ describe ('Складські документи ', function(){
         cy.wait(2000);
         cy.get('.ant-select-dropdown-menu-item-active').first().click({force: true})
         cy.get('.ant-badge > .anticon').last().click({force: true}) // дискетка 
+        cy.wait(2000);
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
     })
 
@@ -997,6 +1004,7 @@ describe ('Складські документи ', function(){
         cy.get(':nth-child(3) > .ant-input').type('STM'+idProduct)
         cy.wait(2000);
         cy.get('.ant-badge > .anticon').last().click({force: true}) // дискетка 
+        cy.wait(2000);
         cy.get('.styles-m__title---Nwr2X > :nth-child(1) > span').should('have.text','Нов.')
     })
 
