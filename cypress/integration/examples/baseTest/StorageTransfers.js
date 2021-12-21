@@ -96,7 +96,7 @@ it(' AUT / Витрати з НЗ / Створення нового Ремонт
         cy.wait(2000);
         cy.get('[data-row-key] > :nth-child(1) > a').first().click({force: true})// вибір першого AUT в списку
         cy.get(':nth-child(5) > :nth-child(1) > div > a').first().invoke('text').then( textFind =>{
-            expect('MRD-'+'4835-'+newNmArr[0]).to.eq(textFind)
+            expect('MRD-'+'594-'+newNmArr[0]).to.eq(textFind)
         })
     })
     cy.wait(2000);
